@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 import WaveImage from './wave.svg'
 import ContentWrapper from "../content-wrapper/content-wrapper";
 
-const Header = () => {
+export const Header = () => {
     return (
         <div className={styles.header}>
             <ContentWrapper className={styles.content}>
@@ -14,5 +14,3 @@ const Header = () => {
         </div>
     );
 };
-
-export default Header;
