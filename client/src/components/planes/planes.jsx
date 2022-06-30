@@ -8,10 +8,12 @@ import {PlaneItem} from "../plane-item";
 import {Link} from "react-router-dom";
 import {paths} from "../../paths";
 import {Button} from "../button";
+import {useSortPlanes} from "../../hooks/useSortPlanes";
 
 export const Planes = () => {
     const dispatch = useDispatch();
     const {planes, isLoading} = useSelector(state => state.planes)
+    const {isDescSort, setIsDescSort, sortedPlanes} = useSortPlanes(planes || [])
 
     useEffect(() => {
         dispatch(getPlanes())
@@ -25,8 +27,11 @@ export const Planes = () => {
         <div>
             <div className={styles.sort}>
                 <ContentWrapper className={styles.planesHeader}>
-                    <Button className={styles.sortBtn}>
-                        Сортировать по цене
+                    <Button
+                        className={styles.sortBtn}
+                        onClick={() => setIsDescSort(!isDescSort)}
+                    >
+                        Сортировать по цене {`${isDescSort ? '+' : '-'}`}
                     </Button>
                     <Link
                         className={styles.createPlaneBtn}
@@ -36,7 +41,7 @@ export const Planes = () => {
 
             </div>
             <ContentWrapper className={styles.planesGrid}>
-                {planes && planes.map(plane => <PlaneItem key={plane.id}{...plane}/>)}
+                {sortedPlanes && sortedPlanes.map(plane => <PlaneItem key={plane.id}{...plane}/>)}
             </ContentWrapper>
         </div>
     );
