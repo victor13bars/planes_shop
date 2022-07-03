@@ -2,38 +2,38 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import planesService from "../services/planesService";
 
 
-export const getPlanes = createAsyncThunk('GET_PLANES', async (_, thunkAPI) => {
+export const getPlane = createAsyncThunk('GET_PLANE', async (id, thunkAPI) => {
     try {
-        return await planesService.getPlanes();
+        return await planesService.getPlane(id);
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data)
     }
 })
 
-const planesSlice = createSlice({
-    name: 'planes',
+const planeSlice = createSlice({
+    name: 'plane',
     initialState: {
-        planes: null,
+        plane: null,
         isError: false,
         isLoading: false,
         message: '',
     },
     extraReducers: (bulder) => {
-        bulder.addCase(getPlanes.pending, (state) => {
+        bulder.addCase(getPlane.pending, (state) => {
             state.isLoading = true
         })
-        bulder.addCase(getPlanes.fulfilled, (state, action) => {
+        bulder.addCase(getPlane.fulfilled, (state, action) => {
             state.isLoading = false
-            state.planes = action.payload
+            state.plane = action.payload[0]
         })
-        bulder.addCase(getPlanes.rejected, (state, action) => {
+        bulder.addCase(getPlane.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload.message
-            state.planes = null
+            state.plane = null
         })
     }
 
 })
 
-export default planesSlice.reducer;
+export default planeSlice.reducer;

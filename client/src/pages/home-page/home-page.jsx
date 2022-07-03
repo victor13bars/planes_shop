@@ -1,6 +1,6 @@
 import React from 'react';
-import {Planes} from "../components/planes";
-import {Header} from "../components/header";
+import {Planes} from "../../components/planes";
+import {Header} from "../../components/header";
 
 const HomePage = () => {
     return (

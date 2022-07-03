@@ -41,7 +41,7 @@ export const Planes = () => {
 
             </div>
             <ContentWrapper className={styles.planesGrid}>
-                {sortedPlanes && sortedPlanes.map(plane => <PlaneItem key={plane.id}{...plane}/>)}
+                {sortedPlanes && sortedPlanes.map(plane => <PlaneItem key={plane._id}{...plane}/>)}
             </ContentWrapper>
         </div>
     );
