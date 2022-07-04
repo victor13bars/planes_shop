@@ -4,6 +4,8 @@ import {useParams, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getPlane} from "../../store/plane/planeSlice";
 import {Spinner} from "../../components/spinner";
+import ContentWrapper from "../../components/content-wrapper/content-wrapper";
+import {Button} from "../../components/button";
 
 export const PlanePage = () => {
     const navigate = useNavigate()
@@ -18,8 +20,27 @@ export const PlanePage = () => {
     if (isLoading) return <Spinner/>
 
     return plane && (
-        <div>
-            PlanePage
-        </div>
+        <ContentWrapper className={styles.plane}>
+            <div className={styles.descContent}>
+                <Button
+                    onClick={() => navigate(-1)}
+                    isBackButton={true}
+                >
+                    Назад
+                </Button>
+                <h1 className={styles.title}>{plane.name}</h1>
+                <div className={styles.price}>{plane.price}</div>
+                <Button
+                    containerClassName={styles.buyBtnContainer}
+                    onClick={() => navigate('/order')}
+                >
+                    Оформить заказ
+                </Button>
+                <p className={styles.desc}>{plane.description}</p>
+            </div>
+            <div className={styles.imageContent}>
+                <img className={styles.image} src={plane.planeImage} alt=""/>
+            </div>
+        </ContentWrapper>
     );
 };
