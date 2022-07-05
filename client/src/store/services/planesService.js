@@ -12,9 +12,16 @@ const getPlane = async (id) => {
     return plane.data
 }
 
+const createPlane = async (planeData) => {
+    const plane = await axios.post(`/api/planes`,planeData);
+
+    return plane.data
+}
+
 const planesService = {
     getPlanes,
-    getPlane
+    getPlane,
+    createPlane,
 }
 
 export default planesService
